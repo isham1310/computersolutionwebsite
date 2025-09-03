@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Solution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <style>
+        /* Theme variables */
+        html.light {
+            --bg-main: #f9fafb;
+            --bg-section: #f3f4f6;
+            --text-main: #2563eb; /* Blue for main text in light mode */
+            --text-accent: #1d4ed8; /* Slightly darker blue accent */
+            --bg-accent-button: #2563eb;
+            --border-main: #e5e7eb;
+            --text-white: #2563eb; /* Blue for headings and bold text */
+            --text-gray-400: #2563eb; /* Blue for muted text */
+            --text-gray-600: #2563eb;
+            --text-gray-900: #1d4ed8;
+            --text-gray-200: #2563eb;
+            --footer-bg: #2563eb;
+            --footer-text: #ffffff;
+        }
+        html.dark {
+            --bg-main: #0d1117;
+            --bg-section: #1e293b;
+            --text-main: #c9d1d9;
+            --text-accent: #21a1f1;
+            --bg-accent-button: #21a1f1;
+            --border-main: #2d3748;
+            --text-white: #ffffff;
+            --text-gray-400: #94a3b8;
+            --text-gray-600: #94a3b8;
+            --text-gray-900: #ffffff;
+            --text-gray-200: #c9d1d9;
+            /* Darker footer for readability */
+            --footer-bg: #0f172a; /* slate-900 */
+            --footer-text: #e5e7eb; /* gray-200 */
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Lora', serif;
+        }
+        .text-accent { color: var(--text-accent); }
+        .bg-accent-button { background-color: var(--bg-accent-button); }
+        .section-padding { padding-top: 3rem; padding-bottom: 3rem; }
+        .card-hover-effect {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(33,161,241,0.2);
+        }
+        .accent-bg-gradient {
+            background-image: linear-gradient(120deg, var(--bg-accent-button) 0%, #1d4ed8 100%);
+        }
+        /* Use theme variables for text colors */
+        h1, h2, h3, h4, h5, h6, .font-bold, .font-semibold, .text-white {
+            color: var(--text-white) !important;
+        }
+        .text-gray-400, .text-gray-600, .text-gray-900, .text-gray-200 {
+            color: var(--text-gray-400) !important;
+        }
+        .text-gray-900 {
+            color: var(--text-gray-900) !important;
+        }
+        .text-gray-200 {
+            color: var(--text-gray-200) !important;
+        }
+        /* Footer fix for light mode */
+        footer {
+            background-color: var(--footer-bg) !important;
+            color: var(--footer-text) !important;
+        }
+        footer h3, footer .font-bold, footer .text-accent {
+            color: var(--footer-text) !important;
+        }
+        footer a {
+            color: var(--footer-text) !important;
+        }
+        /* Responsive tweaks */
+        @media (max-width: 640px) {
+            h1, h2, h3, h4 { font-size: 1.25rem !important; }
+            .section-padding { padding-top: 2rem; padding-bottom: 2rem; }
+            .p-8 { padding: 1rem !important; }
+            .rounded-xl { border-radius: 0.75rem !important; }
+            /* Chatbot mobile adjustments */
+            #chatbot-window {
+                width: calc(100vw - 2rem);
+                right: 1rem;
+                bottom: 6rem;
+                height: 70vh;
+            }
+            /* Chatbot suggestion buttons */
+            .suggestion-btn {
+                display: block;
+                width: 100%;
+                text-align: left;
+                padding: 0.5rem 0.75rem;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 0.5rem;
+                font-size: 0.875rem;
+                background-color: rgba(75, 85, 99, 0.5); /* gray-600 with opacity */
+                transition: background-color 0.2s;
+                color: var(--text-white);
+            }
+            .suggestion-btn:hover { background-color: rgba(107, 114, 128, 0.5); } /* gray-500 with opacity */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-white">
+                Computer<span class="text-accent">Solution</span>
+            </a>
+            <div class="flex items-center space-x-4">
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-400 hover:text-white transition-colors duration-200">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-white transition-colors duration-200">About Us</a>
+                <a href="#services" class="text-gray-400 hover:text-white transition-colors duration-200">Services</a>
+                <a href="#internships" class="text-gray-400 hover:text-white transition-colors duration-200">Internships</a>
+                <a href="#testimonials" class="text-gray-400 hover:text-white transition-colors duration-200">Testimonials</a>
+                <a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-200">Contact</a>
+                    <a href="#verify" class="text-gray-400 hover:text-white transition-colors duration-200">Verify Certificate</a>
+            </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-400 focus:outline-none" aria-label="Open mobile menu" title="Open mobile menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile menu content -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-b border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-800">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-800 hover:text-white">About Us</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-800 hover:text-white">Services</a>
+                <a href="#internships" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-800 hover:text-white">Internships</a>
+                <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-800 hover:text-white">Testimonials</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-800 hover:text-white">Contact</a>
+                <a href="#verify" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:bg-gray-800 hover:text-white">Verify Certificate</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="section-padding text-center">
+            <div class="max-w-5xl mx-auto px-4">
+                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 animate-fadeInUp" style="animation-delay: 0.2s;">
+                    Your Partner in Digital Excellence
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-8 animate-fadeInUp" style="animation-delay: 0.4s;">
+                    We are Computer Solution, dedicated to delivering cutting-edge software development and IT services.
+                </p>
+                <a href="#contact" class="inline-block py-3 px-8 bg-accent-button text-white font-bold rounded-full shadow-lg hover:bg-blue-600 transition-colors duration-300 animate-fadeInUp" style="animation-delay: 0.6s;">
+                    Get Started
+                </a>
+            </div>
+        </section>
+        
+        <!-- About Us Section -->
+        <section id="about" class="section-padding">
+            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-fadeInUp" style="animation-delay: 0.2s;">
+                    <img src="aboutus1.webp" alt="About Us Illustration" class="rounded-xl shadow-lg w-full">
+                </div>
+                <div class="animate-fadeInUp" style="animation-delay: 0.4s;">
+                    <h3 class="text-xl font-semibold text-accent mb-2">About Us</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Transforming Ideas into Impact</h2>
+                    <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
+                        At Computer Solution, we bridge the gap between ideas and impact. From startups to enterprises, we provide cutting-edge IT solutions, blending creativity with technology. Our team thrives on turning complex challenges into seamless, scalable solutions empowering businesses to excel in the digital age.
+                    </p>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics Section -->
+        <section id="metrics" class="bg-gray-800 py-12">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="accent-bg-gradient p-8 rounded-xl shadow-lg grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white animate-fadeInUp" style="animation-delay: 0.6s;">
+                    <div>
+                        <h3 class="text-4xl md:text-5xl font-bold mb-1">300+</h3>
+                        <p class="text-gray-200">Satisfied Clients</p>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl md:text-5xl font-bold mb-1">255k+</h3>
+                        <p class="text-gray-200">Lines of Code</p>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl md:text-5xl font-bold mb-1">20+</h3>
+                        <p class="text-gray-200">Features Delivered</p>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl md:text-5xl font-bold mb-1">1000+</h3>
+                        <p class="text-gray-200">Interns Mentored</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us? Section -->
+        <section id="why-us" class="section-padding">
+            <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-fadeInUp" style="animation-delay: 0.8s;">
+                    <h3 class="text-xl font-semibold text-accent mb-2">Why Choose Us?</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Your Growth, Our Mission</h2>
+                    <p class="text-lg text-gray-400 max-w-lg mb-8">
+                        We don't just deliver projects – we create success stories. At Computer Solution, we combine expertise, innovation, and dedication to help you achieve measurable results.
+                    </p>
+                    <div class="space-y-4">
+                        <!-- Accordion 1 -->
+                        <div class="accordion-item">
+                            <button class="accordion-button flex justify-between items-center w-full py-4 text-left text-white font-semibold">
+                                <span>Expertise Across Domains</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content hidden text-gray-400 pb-4">
+                                From data analytics to design, development, and marketing – we've mastered the skills that drive business growth.
+                            </div>
+                        </div>
+                        <!-- Accordion 2 -->
+                        <div class="accordion-item">
+                            <button class="accordion-button flex justify-between items-center w-full py-4 text-left text-white font-semibold">
+                                <span>Real-World Impact</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content hidden text-gray-400 pb-4">
+                                Our projects are designed to solve real problems and create tangible value, ensuring a meaningful impact for our clients.
+                            </div>
+                        </div>
+                        <!-- Accordion 3 -->
+                        <div class="accordion-item">
+                            <button class="accordion-button flex justify-between items-center w-full py-4 text-left text-white font-semibold">
+                                <span>Client-Centric Approach</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content hidden text-gray-400 pb-4">
+                                We put your needs first, collaborating closely to understand your goals and deliver tailor-made solutions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="animate-fadeInUp" style="animation-delay: 1s;">
+                    <img src="whychooseus.png" alt="Why Choose Us Illustration" class="rounded-xl shadow-lg w-full">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section-padding">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="inline-block bg-blue-800 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full mb-4">ENTERPRISE SOLUTIONS</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Transforming Businesses Through Technology</h2>
+                    <p class="text-lg text-gray-400 max-w-3xl mx-auto">
+                        We deliver comprehensive digital solutions that drive innovation, efficiency, and measurable growth for enterprises.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Service Card 1: Data Solutions -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center">
+                        <img src="b2b-database-provider.jpg" alt="Data Solutions Icon" class="w-32 h-32 mb-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Data Solutions</h3>
+                        <p class="text-gray-400 mb-6">
+                            Enterprise-grade data services that transform information into strategic assets. We build secure, scalable, and intelligent data ecosystems.
+                        </p>
+                        <div class="w-full text-left">
+                            <h4 class="text-lg font-semibold text-white mb-2">Core Capabilities</h4>
+                            <ul class="text-gray-400 list-disc list-inside space-y-1">
+                                <li>Advanced Data Analytics & Visualization</li>
+                                <li>Business Intelligence (BI) Platforms</li>
+                                <li>Big Data Engineering</li>
+                                <li>Data Warehousing & ETL Automation</li>
+                                <li>Predictive & Prescriptive Analytics</li>
+                                <li>Data Governance & Compliance</li>
+                            </ul>
+                            <h4 class="text-lg font-semibold text-white mt-4 mb-2">Technologies</h4>
+                            <ul class="text-gray-400 list-disc list-inside space-y-1">
+                                <li>Power BI, Tableau, Snowflake</li>
+                                <li>AWS, Redshift, Azure Synapse</li>
+                                <li>Google BigQuery, Python, R</li>
+                                <li>Apache Spark, Hadoop</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Service Card 2: Design & Innovation -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center">
+                        <img src="designandinnovate.jpg" alt="Design & Innovation Icon" class="w-32 h-32 mb-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Design & Innovation</h3>
+                        <p class="text-gray-400 mb-6">
+                            Impactful, user-centric designs that blend aesthetics with functionality, ensuring optimal engagement.
+                        </p>
+                        <div class="w-full text-left">
+                            <h4 class="text-lg font-semibold text-white mb-2">Core Capabilities</h4>
+                            <ul class="text-gray-400 list-disc list-inside space-y-1">
+                                <li>Brand Identity Design</li>
+                                <li>Product & Interaction Design</li>
+                                <li>3D Modeling & Motion Graphics</li>
+                                <li>Design System Development</li>
+                            </ul>
+                            <h4 class="text-lg font-semibold text-white mt-4 mb-2">Tools</h4>
+                            <ul class="text-gray-400 list-disc list-inside space-y-1">
+                                <li>Figma, Adobe Creative Cloud, Sketch</li>
+                                <li>InVision, Zeplin, Blender</li>
+                                <li>Cinema 4D, Webflow</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Service Card 3: Development & Engineering -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center">
+                        <img src="developmentandengineering.jpg" alt="Development & Engineering Icon" class="w-32 h-32 mb-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Development & Engineering</h3>
+                        <p class="text-gray-400 mb-6">
+                            Full-stack expertise covering everything from high-performance web platforms to mission-critical enterprise software.
+                        </p>
+                        <div class="w-full text-left">
+                            <h4 class="text-lg font-semibold text-white mb-2">Expertise Areas</h4>
+                            <ul class="text-gray-400 list-disc list-inside space-y-1">
+                                <li>Enterprise App Development</li>
+                                <li>Mobile App Development</li>
+                                <li>Custom Software Solutions</li>
+                                <li>Cloud Application Development</li>
+                                <li>API & Systems Integration</li>
+                                <li>DevOps & Automation</li>
+                            </ul>
+                            <h4 class="text-lg font-semibold text-white mt-4 mb-2">Tech Stack</h4>
+                            <ul class="text-gray-400 list-disc list-inside space-y-1">
+                                <li>React, Angular, Vue.js, Node.js</li>
+                                <li>Python, Java, .NET, Flutter</li>
+                                <li>Kotlin, Swift, Docker, Kubernetes</li>
+                                <li>AWS, Azure, GCP</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Service Card 4: Digital Marketing -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 flex flex-col items-center text-center">
+                        <img src="diditalmarketing.jpg" alt="Digital Marketing Icon" class="w-32 h-32 mb-6">
+                        <h3 class="text-2xl font-semibold text-white mb-2">Digital Marketing</h3>
+                        <p class="text-gray-400 mb-6">
+                            Data-driven marketing strategies that accelerate brand growth, maximize ROI, and deliver measurable business outcomes.
+                        </p>
+                        <div class="w-full text-left">
+                            <h4 class="text-lg font-semibold text-white mb-2">Marketing Expertise</h4>
+                            <ul class="text-gray-400 list-disc list-inside space-y-1">
+                                <li>360° Digital Marketing Strategy</li>
+                                <li>Search Engine Optimization (SEO)</li>
+                                <li>Paid Media & Performance Marketing</li>
+                                <li>Content Marketing & Storytelling</li>
+                                <li>Social Media Management</li>
+                                <li>Marketing Automation & CRM</li>
+                            </ul>
+                            <h4 class="text-lg font-semibold text-white mt-4 mb-2">Platforms</h4>
+                            <ul class="text-gray-400 list-disc list-inside space-y-1">
+                                <li>Google Analytics 4, Google Ads</li>
+                                <li>Meta Ads, HubSpot, Salesforce</li>
+                                <li>SEMrush, Ahrefs, Mailchimp</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Internship Section -->
+        <section id="internships" class="section-padding">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Internships at Computer Solution</h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                        We've transformed internship experiences for thousands of students from around the world.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 mb-16">
+                    <!-- Metric Card 1 -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 text-center animate-fadeInUp" style="animation-delay: 0.2s;">
+                        <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.467 9.5 5 8 5c-3.15 0-5 2.85-5 6v2c0 3.15 1.85 6 5 6c1.5 0 2.832-.467 4-1.253M12 6.253v13C13.168 18.533 14.5 19 16 19c3.15 0 5-2.85 5-6v-2c0-3.15-1.85-6-5-6c-1.5 0-2.832.467-4 1.253"></path></svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2">
+                           Government Recognized
+                        </h3>
+                        <p class="text-gray-400">
+                             Our internship programs are officially recognized and approved.
+                        </p>
+                    </div>
+                    <!-- Metric Card 2 -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 text-center animate-fadeInUp" style="animation-delay: 0.4s;">
+                        <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                            <h3 class="text-5xl font-bold text-white mb-2">900+</h3>
+                        </div>
+                        <p class="text-2xl font-semibold text-white mb-2">Projects Completed</p>
+                        <p class="text-gray-400">Real-world impact through student work</p>
+                    </div>
+                    <!-- Metric Card 3 -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 text-center animate-fadeInUp" style="animation-delay: 0.6s;">
+                        <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                            <h3 class="text-5xl font-bold text-white mb-2">4.8/5</h3>
+                        </div>
+                        <p class="text-2xl font-semibold text-white mb-2">Average Rating</p>
+                        <p class="text-gray-400">From our internship participants</p>
+                    </div>
+                </div>
+
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Internship Benefits</h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                        Why our internship program stands out from the rest.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                    <!-- Benefit Card 1 -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 text-center relative animate-fadeInUp" style="animation-delay: 0.8s;">
+                         <span class="absolute top-0 right-0 mt-4 mr-4 bg-accent-button text-white text-xs font-semibold px-2 py-1 rounded-full">Popular</span>
+                         <div class="w-16 h-16 mx-auto bg-accent-button rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.074 6.368a1 1 0 00.95.696h6.786c.962 0 1.371 1.24.588 1.81l-5.556 4.041a1 1 0 00-.364 1.118l2.074 6.368c.3.921-.755 1.688-1.54 1.118l-5.556-4.041a1 1 0 00-1.176 0l-5.556 4.041c-.785.57-1.84-.197-1.54-1.118l2.074-6.368a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h6.786a1 1 0 00.95-.696l2.074-6.368z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-white mb-2">Government Recognized Certificates</h3>
+                        <p class="text-gray-400">Receive government-approved certificates that add significant value to your profile.</p>
+                    </div>
+                    <!-- Benefit Card 2 -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 text-center animate-fadeInUp" style="animation-delay: 1s;">
+                         <div class="w-16 h-16 mx-auto bg-accent-button rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3-.895-3-2 .895-2 2-2zM12 14c-1.657 0-3-.895-3-2s1.343-2 3-2 3 .895 3 2-1.343 2-3 2zM12 20c-1.657 0-3-.895-3-2s1.343-2 3-2 3 .895 3 2-1.343 2-3 2z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-white mb-2">LOR for Top Performers</h3>
+                        <p class="text-gray-400">Earn recommendation letters from industry experts to boost your career.</p>
+                    </div>
+                    <!-- Benefit Card 3 -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 text-center animate-fadeInUp" style="animation-delay: 1.2s;">
+                         <div class="w-16 h-16 mx-auto bg-accent-button rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.322a4.992 4.992 0 01-1.282-1.465M20 12v3a5 5 0 01-5 5H9a5 5 0 01-5-5v-3a5 5 0 015-5h.718M20 12l-1.382-1.382a5 5 0 01-1.127-1.503M4 12v3a5 5 0 005 5h.718M4 12l1.382-1.382a5 5 0 001.127-1.503"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-white mb-2">Lifetime Verification</h3>
+                        <p class="text-gray-400">Permanent online verification of your certificates for future reference.</p>
+                    </div>
+                    <!-- Benefit Card 4 -->
+                    <div class="card-hover-effect bg-gray-800 p-8 rounded-xl shadow-md border border-gray-700 text-center relative animate-fadeInUp" style="animation-delay: 1.4s;">
+                        <span class="absolute top-0 right-0 mt-4 mr-4 bg-accent-button text-white text-xs font-semibold px-2 py-1 rounded-full">Premium</span>
+                        <div class="w-16 h-16 mx-auto bg-accent-button rounded-full flex items-center justify-center mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.5L16.5 18 10 11.5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-white mb-2">Full-time Opportunities</h3>
+                        <p class="text-gray-400">Top performers get considered for full-time roles at Computer Solution.</p>
+                    </div>
+                </div>
+
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Internship Process</h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                        A simple, four-step journey to your dream internship.
+                    </p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center justify-between relative space-y-12 md:space-y-0 md:space-x-8">
+                    <!-- Process Step 1 -->
+                    <div class="flex flex-col items-center text-center flex-1 z-20 animate-fadeInUp" style="animation-delay: 1.6s;">
+                        <div class="w-20 h-20 bg-accent-button rounded-full flex items-center justify-center mb-4 relative">
+                            <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-2.5 7.5v-2a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 0-.5.5v2h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1v2a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-2h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zM15.5 14H18v-2h-2.5zM15.5 12h-2a.5.5 0 0 0-.5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5zM17.5 14v-2h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-white mb-2">1. Apply via LinkedIn</h4>
+                        <p class="text-gray-400">Submit your application through our LinkedIn portal.</p>
+                    </div>
+                    <!-- Process Step 2 -->
+                    <div class="flex flex-col items-center text-center flex-1 z-20 animate-fadeInUp" style="animation-delay: 1.8s;">
+                        <div class="w-20 h-20 bg-accent-button rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17.062l-2.775 2.775a2 2 0 01-2.828 0l-.707-.707a2 2 0 010-2.828l2.775-2.775m4.243-4.243l-4.243-4.243m4.243 4.243l-.707.707a2 2 0 01-2.828 0l-2.775-2.775m4.243 4.243l4.243 4.243"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-white mb-2">2. Select Your Domain</h4>
+                        <p class="text-gray-400">Choose from our 12+ specialized domains.</p>
+                    </div>
+                    <!-- Process Step 3 -->
+                    <div class="flex flex-col items-center text-center flex-1 z-20 animate-fadeInUp" style="animation-delay: 2s;">
+                        <div class="w-20 h-20 bg-accent-button rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m-4 5h10a2 2 0 002-2V7a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-white mb-2">3. Work on Real Projects</h4>
+                        <p class="text-gray-400">Gain hands-on experience with impactful work.</p>
+                    </div>
+                    <!-- Process Step 4 -->
+                    <div class="flex flex-col items-center text-center flex-1 z-20 animate-fadeInUp" style="animation-delay: 2.2s;">
+                        <div class="w-20 h-20 bg-accent-button rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22a10 10 0 100-20 10 10 0 000 18zM9 12a3 3 0 106 0 3 3 0 00-6 0z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-white mb-2">4. Get Certified</h4>
+                        <p class="text-gray-400">Earn your official recognition and professional certification.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section-padding bg-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                        Hear from our satisfied customers and interns about their experience with Computer Solution.
+                    </p>
+                </div>
+                <div id="testimonials-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 (Client) -->
+                    <div class="card-hover-effect bg-gray-900 p-8 rounded-xl shadow-md border border-gray-700 animate-fadeInUp" style="animation-delay: 0.2s;">
+                        <div class="flex items-center mb-4">
+                            <!-- Star Rating -->
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic mb-4">"The team at Computer Solution delivered an outstanding website. The process was smooth and the communication was excellent. Highly recommend their services!"</p>
+                        <p class="font-bold text-white">- Ananya Sharma</p>
+                    </div>
+                    <!-- Testimonial 2 (Client) -->
+                    <div class="card-hover-effect bg-gray-900 p-8 rounded-xl shadow-md border border-gray-700 animate-fadeInUp" style="animation-delay: 0.4s;">
+                        <div class="flex items-center mb-4">
+                            <!-- Star Rating -->
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic mb-4">"Their IT consulting services were a game-changer for our small business. They helped us streamline our workflow and significantly improve our security."</p>
+                        <p class="font-bold text-white">- Rohan Patel</p>
+                    </div>
+                    <!-- Testimonial 3 (Client) -->
+                    <div class="card-hover-effect bg-gray-900 p-8 rounded-xl shadow-md border border-gray-700 animate-fadeInUp" style="animation-delay: 0.6s;">
+                        <div class="flex items-center mb-4">
+                            <!-- Star Rating -->
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic mb-4">"Computer Solution's work on our mobile app was flawless. The attention to detail and commitment to quality is truly impressive."</p>
+                        <p class="font-bold text-white">- Priya Singh</p>
+                    </div>
+                    <!-- Testimonial 4 (Client) -->
+                    <div class="card-hover-effect bg-gray-900 p-8 rounded-xl shadow-md border border-gray-700 animate-fadeInUp" style="animation-delay: 0.8s;">
+                        <div class="flex items-center mb-4">
+                            <!-- Star Rating -->
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.92 8.725c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic mb-4">"The network installation was completed on time and within budget. Computer Solution's professionalism and technical expertise are top-notch."</p>
+                        <p class="font-bold text-white">- Vivek Kumar</p>
+                    </div>
+                     <!-- Testimonial 5 (Client) -->
+                     <div class="card-hover-effect bg-gray-900 p-8 rounded-xl shadow-md border border-gray-700 animate-fadeInUp" style="animation-delay: 1s;">
+                        <div class="flex items-center mb-4">
+                            <!-- Star Rating -->
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic mb-4">"We are so impressed with the level of service and dedication from the Computer Solution team. Our new custom software is perfect for our needs."</p>
+                        <p class="font-bold text-white">- Sneha Reddy</p>
+                    </div>
+                     <!-- Testimonial 6 (Client) -->
+                     <div class="card-hover-effect bg-gray-900 p-8 rounded-xl shadow-md border border-gray-700 animate-fadeInUp" style="animation-delay: 1.2s;">
+                        <div class="flex items-center mb-4">
+                            <!-- Star Rating -->
+                            <div class="flex text-yellow-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.696h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.785.57-1.84-.197-1.54-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.924 11.8c-.783-.57-.375-1.81.588-1.81h3.462a1 1 0 00.95-.696l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic mb-4">"We had a complex IT infrastructure problem, and Computer Solution provided a simple, elegant solution. Their technical skills are unparalleled."</p>
+                        <p class="font-bold text-white">- Vijay Kumar</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verify Certificate Section -->
+        <section id="verify" class="section-padding bg-gray-900">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Verify Your Certificate</h2>
+                    <p class="text-lg text-gray-400">Enter the credential ID from your certificate to verify its authenticity.</p>
+                </div>
+
+                <!-- Verification Form -->
+                <form id="verification-form" class="max-w-xl mx-auto mb-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input type="text" id="credential-id" name="credential-id" class="w-full p-4 bg-gray-800 text-white rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-button" placeholder="Enter Certificate ID" required>
+                        <button type="submit" class="py-4 px-8 bg-accent-button text-white font-bold rounded-md shadow-lg hover:bg-blue-600 transition-colors duration-300">
+                            Verify
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Loading Indicator -->
+                <div id="loading" class="hidden text-center text-white py-8">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent-button"></div>
+                    <p class="mt-4">Verifying...</p>
+                </div>
+
+                <!-- Error Message -->
+                <div id="error-message" class="hidden max-w-xl mx-auto bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-lg text-center"></div>
+
+                <!-- Results Display -->
+                <div id="results" class="hidden max-w-3xl mx-auto bg-gray-900/50 backdrop-blur-sm p-8 sm:p-10 rounded-2xl shadow-2xl border-2 border-accent-button/50 relative">
+                    <div id="results-content">
+                        <!-- Certificate details will be injected here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-padding">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="md:grid md:grid-cols-2 md:gap-12 items-center">
+                    <!-- Left Side: Contact Form -->
+                    <div class="p-8">
+                        <h2 class="text-4xl font-bold text-white mb-2">Let's Talk!</h2>
+                        <p class="text-lg text-gray-400 mb-8">Get in touch with us using the enquiry form or contact details below.</p>
+                        <form id="contact-form" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-gray-400 mb-2">First Name *</label>
+                                <input type="text" id="name" name="name" class="w-full p-3 bg-gray-900 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-button" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-400 mb-2">Email Address *</label>
+                                <input type="email" id="email" name="email" class="w-full p-3 bg-gray-900 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-button" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-400 mb-2">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" class="w-full p-3 bg-gray-900 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-button" required>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <label for="message" class="block text-gray-400">Message</label>
+                                    <span class="text-sm text-gray-500">0/180</span>
+                                </div>
+                                <textarea id="message" name="message" rows="4" class="w-full p-3 bg-gray-900 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-button"></textarea>
+                            </div>
+                            <div class="text-center md:text-left">
+                                <button type="submit" class="py-3 px-8 bg-accent-button text-white font-bold rounded-full shadow-lg hover:bg-blue-600 transition-colors duration-300">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Right Side: Contact Info -->
+                    <div class="accent-bg-gradient p-8 rounded-xl shadow-lg text-white">
+                        <div class="flex items-center mb-6">
+                            <svg class="w-8 h-8 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <div>
+                                <h3 class="text-xl font-semibold">Our Location</h3>
+                                <p class="text-gray-200">450 mumbai maharashtra 400001</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <svg class="w-8 h-8 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26c.74.49 1.63.49 2.37 0L21 8M21 8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V8z"></path></svg>
+                            <div>
+                                <h3 class="text-xl font-semibold">Quick Contact</h3>
+                                <p class="text-gray-200">Email: ComputerSolution0105@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.001v-2M15 16.001a3 3 0 10-6 0v2"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path></svg>
+                            <div>
+                                <h3 class="text-xl font-semibold">Phone Number</h3>
+                                <p class="text-gray-200">1234567890</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1">
+                <div class="flex items-center space-x-2">
+                    <img src="https://placehold.co/40x40/000000/FFFFFF?text=CS" alt="Logo" class="rounded-full">
+                    <div class="text-xl font-bold text-white">
+                        Computer<span class="text-accent">Solution</span>
+                    </div>
+                </div>
+                <p class="mt-4 text-gray-200 font-semibold">
+                    At Computer Solution, we combine cutting-edge technology with creative expertise to deliver smart, scalable IT solutions. From data analytics to design, development, and marketing, we empower businesses to innovate, grow, and lead in the digital era.
+                </p>
+            </div>
+            
+            <div class="col-span-1">
+                <h3 class="text-lg font-bold text-white mb-4">Contact Us</h3>
+                <p class="text-gray-200 font-semibold">
+                    <strong class="font-bold text-white">Address:</strong>
+                    <br>450 mumbai maharashtra 400001
+                </p>
+                <p class="text-gray-200 font-semibold mt-2">
+                    <strong class="font-bold text-white">Phone:</strong>
+                    <br>1234567890
+                </p>
+                <p class="text-gray-200 font-semibold mt-2">
+                    <strong class="font-bold text-white">Email:</strong>
+                    <br>ComputerSolution0105@gmail.com
+                </p>
+            </div>
+
+            <div class="col-span-1">
+                <h3 class="text-lg font-bold text-white mb-4">Useful Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="text-gray-200 font-semibold hover:text-white">Home</a></li>
+                    <li><a href="#about" class="text-gray-200 font-semibold hover:text-white">About Us</a></li>
+                    <li><a href="#services" class="text-gray-200 font-semibold hover:text-white">Services</a></li>
+                    <li><a href="#internships" class="text-gray-200 font-semibold hover:text-white">Internships</a></li>
+                    <li><a href="#testimonials" class="text-gray-200 font-semibold hover:text-white">Testimonials</a></li>
+                    <li><a href="#contact" class="text-gray-200 font-semibold hover:text-white">Contact Us</a></li>
+                    <li><a href="#verify" class="text-gray-200 font-semibold hover:text-white">Verify Certificate</a></li>
+                </ul>
+            </div>
+
+            <div class="col-span-1">
+                <h3 class="text-lg font-bold text-white mb-4">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn" class="text-gray-200 font-semibold hover:text-blue-400 transition-colors duration-200">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.378-1.122 2.5-2.5 2.5S0 4.878 0 3.5 1.122 1 2.48 1c1.378 0 2.5 1.122 2.5 2.5zM22.95 24h-4.73c-1.3 0-2.38-.64-2.85-1.57v-.03c-.1-.13-.19-.28-.27-.45V15.7h-4.3c.02.6.04 1.2.04 1.8V24h-4.73s.06-12.8 0-14.7H13.8v2.08h.03a5.55 5.55 0 014.88-2.67c3.48 0 6.17 2.27 6.17 7.15V24h-4.72v-6.3c0-2.3-.92-3.88-2.88-3.88-1.3 0-2.07.9-2.42 1.8a2.53"></path></svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" class="text-gray-200 font-semibold hover:text-pink-400 transition-colors duration-200">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.585.016 4.84.072 1.255.056 2.052.28 2.728.53.676.25 1.218.665 1.666 1.113.448.448.863.99 1.113 1.666.25.676.474 1.473.53 2.728.056 1.255.072 1.636.072 4.84v.01c0 3.204-.016 3.585-.072 4.84-.056 1.255-.28 2.052-.53 2.728-.25.676-.665 1.218-1.113 1.666-.448.448-.99.863-1.666 1.113-.676.25-1.473.474-2.728.53-1.255.056-1.636.072-4.84.072h-.01c-3.204 0-3.585-.016-4.84-.072-1.255-.056-2.052-.28-2.728-.53-.676-.25-1.218-.665-1.666-1.113-.448-.448-.863-.99-1.113-1.666-.25-.676-.474-1.473-.53-2.728-.056-1.255-.072-1.636-.072-4.84v-.01c0-3.204.016-3.585.072-4.84.056-1.255.28-2.052.53-2.728.25-.676.665-1.218 1.113-1.666.448-.448.99-.863 1.666-1.113.676-.25 1.473-.474 2.728-.53 1.255-.056 1.636-.072 4.84-.072zm0 1.838c-3.13 0-3.486.012-4.73.067-1.19.053-1.895.263-2.48.486-.584.223-1.01.53-1.393.914-.383.383-.69.81-.914 1.393-.223.585-.433 1.29-.486 2.48-.055 1.244-.067 1.6-.067 4.73v.01c0 3.13.012 3.486.067 4.73.053 1.19.263 1.895.486 2.48.223.584.53.91.914 1.393.383.383.81.69 1.393.914.585.223 1.29.433 2.48.486 1.244.055 1.6.067 4.73.067h.01c3.13 0 3.486-.012 4.73-.067 1.19-.053 1.895-.263 2.48-.486.584-.223 1.01-.53 1.393-.914.383-.383.69-.81.914-1.393.223-.585.433-1.29.486-2.48.055-1.244.067-1.6.067-4.73v-.01c0-3.13-.012-3.486-.067-4.73-.053-1.19-.263-1.895-.486-2.48-.223-.584-.53-.91-.914-1.393-.383-.383-.81-.69-1.393-.914-.585-.223-1.29-.433-2.48-.486-1.244-.055-1.6-.067-4.73-.067zm0 3.511a5.65 5.65 0 100 11.3 5.65 5.65 0 000-11.3zM12 16.353a4.353 4.353 0 110-8.706 4.353 4.353 0 010 8.706zM18.46 5.56a1.31 1.31 0 100 2.62 1.31 1.31 0 000-2.62z"></path></svg>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube" class="text-gray-200 font-semibold hover:text-red-400 transition-colors duration-200">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M22.052 7.151c-.134-.5-.452-.922-.888-1.235C20.627 5.56 19.336 5.25 12.012 5.25c-7.324 0-8.614.31-9.152.666-.436.313-.754.735-.888 1.235-.152.56-.168 1.968-.168 4.852 0 2.885.016 4.293.168 4.853.134.5.452.922.888 1.235.538.356 1.828.666 9.152.666 7.324 0 8.614-.31 9.152-.666.436-.313.754-.735.888-1.235.152-.56.168-1.968.168-4.853s-.016-4.293-.168-4.852zM9.47 16.712V9.337l7.35 3.687-7.35 3.688z"></path></svg>
+                    </a>
+                </div>
+                            </div>
+                        </div>
+        <div class="max-w-7xl mx-auto px-4 text-center mt-8 text-gray-200 font-semibold">
+            <p>&copy; 2024 Computer Solution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot -->
+    <div id="chatbot-container" class="fixed bottom-8 right-8 z-50">
+        <!-- Chatbot Toggle Button -->
+        <button id="chatbot-toggle-button" class="bg-accent-button text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center focus:outline-none hover:bg-blue-600 transition-all duration-300 transform" aria-label="Open chatbot" title="Open chatbot">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chatbot-window" class="hidden fixed bottom-28 right-8 w-80 sm:w-96 h-[60vh] bg-gray-800 rounded-xl shadow-2xl flex flex-col border border-gray-700 transition-all duration-300 ease-in-out transform opacity-0 scale-95">
+            <!-- Header -->
+            <div class="flex justify-between items-center p-4 bg-gray-900 rounded-t-xl border-b border-gray-700">
+                <h3 class="text-lg font-semibold text-white">AI Assistant</h3>
+                <button id="chatbot-close-button" class="text-gray-400 hover:text-white" aria-label="Close chatbot" title="Close chatbot">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Messages -->
+            <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto space-y-4">
+                <!-- Bot Welcome Message -->
+                <div class="flex" id="welcome-message-container">
+                    <div class="bg-accent-button text-white p-3 rounded-lg max-w-xs text-sm">
+                        <p class="font-semibold">Hello! How can I help you today?</p>
+                    </div>
+                    </div>
+                <!-- Typing Indicator -->
+                <div id="typing-indicator" class="hidden">
+                    <div class="flex items-center space-x-2 p-3">
+                        <div class="w-2 h-2 bg-accent-button rounded-full animate-pulse" style="animation-delay: 0s;"></div>
+                        <div class="w-2 h-2 bg-accent-button rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                        <div class="w-2 h-2 bg-accent-button rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+            <!-- Input -->
+            <div class="p-4 border-t border-gray-700">
+                <form id="chatbot-form" class="flex space-x-2">
+                    <input type="text" id="chatbot-input" class="w-full p-3 bg-gray-900 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-button text-white" placeholder="Ask about services, internships..." autocomplete="off">
+                    <button type="submit" class="p-3 bg-accent-button text-white font-bold rounded-md shadow-lg hover:bg-blue-600 transition-colors duration-300" aria-label="Send message">
+                        <svg class="w-6 h-6 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    </button>
+                </form>
+                            </div>
+                        </div>
+                    </div>
+
+    <script>
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Accordion functionality for "Why Choose Us?" section
+        const accordionButtons = document.querySelectorAll('.accordion-button');
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.accordion-icon');
+
+                // Toggle the content's visibility
+                content.classList.toggle('hidden');
+
+                // Change the icon from + to - and vice versa
+                if (icon.textContent === '+') {
+                    icon.textContent = '-';
+                } else {
+                    icon.textContent = '+';
+                }
+            });
+        });
+
+        // Certificate Verification System
+        (function initVerification() {
+            const verificationForm = document.getElementById('verification-form');
+            if (!verificationForm) return;
+
+            const resultsDiv = document.getElementById('results');
+            const resultsContentDiv = document.getElementById('results-content');
+            const loadingDiv = document.getElementById('loading');
+            const errorDiv = document.getElementById('error-message');
+            
+            // Certificate data is now embedded directly in the HTML to create a single-file experience.
+            const certificatesData = [
+                { "Name": "Raj Singh", "Certificate ID": "CERT-001-XYZ", "Course Name": "Project Management Professional", "Duration": "1 MONTH", "Date of Issue": "1/15/2026", "Verification Status": "TRUE" },
+                { "Name": "Suman Singh", "Certificate ID": "CERT-002-ABC", "Course Name": "Certified Scrum Master", "Duration": "1 MONTH", "Date of Issue": "3/20/2025", "Verification Status": "TRUE" },
+                { "Name": "Achyut Singh", "Certificate ID": "CERT-003-DEF", "Course Name": "Data Science Fundamentals", "Duration": "1 MONTH", "Date of Issue": "6/10/2027", "Verification Status": "FALSE" },
+                { "Name": "Amiy Singh", "Certificate ID": "CERT-004-GHI", "Course Name": "Cybersecurity Analyst", "Duration": "1 MONTH", "Date of Issue": "11/1/2024", "Verification Status": "TRUE" },
+                { "Name": "Gaurav Choudhary", "Certificate ID": "CERT-005-JKL", "Course Name": "Web Development Masterclass", "Duration": "1 MONTH", "Date of Issue": "9/25/2026", "Verification Status": "TRUE" },
+                { "Name": "Piyush tripathi", "Certificate ID": "CERT-006-MNO", "Course Name": "Cloud Solutions Architect", "Duration": "1 MONTH", "Date of Issue": "2/5/2027", "Verification Status": "FALSE" },
+                { "Name": "Aniruddh Shivekar", "Certificate ID": "CERT-007-PQR", "Course Name": "Digital Marketing Specialist", "Duration": "1 MONTH", "Date of Issue": "7/12/2025", "Verification Status": "TRUE" },
+                { "Name": "Siddesh Yadav", "Certificate ID": "CERT-008-STU", "Course Name": "Advanced Python Programming", "Duration": "1 MONTH", "Date of Issue": "4/30/2026", "Verification Status": "TRUE" },
+                { "Name": "SAHIL Yadav", "Certificate ID": "CERT-009-VWX", "Course Name": "Advanced Python Programming", "Duration": "3 MONTH", "Date of Issue": "4/30/2026", "Verification Status": "TRUE" },
+                { "Name": "Aayush singh", "Certificate ID": "CERT-011-VWX", "Course Name": "Python Internship", "Duration": "1 MONTH", "Date of Issue": "2/30/2026", "Verification Status": "TRUE" },
+                { "Name": "Ritik Sharma", "Certificate ID": "CERT-010-YZA", "Course Name": "Machine Learning Engineer", "Duration": "1 MONTH", "Date of Issue": "12/18/2024", "Verification Status": "TRUE" }
+            ];
+
+            function displayCertificate(certificate) {
+                const isVerified = String(certificate['Verification Status']).toUpperCase() === 'TRUE';
+                const statusText = isVerified ? 'VERIFIED' : 'NOT VERIFIED';
+                const statusColor = isVerified ? 'bg-green-500' : 'bg-yellow-500';
+                const statusIcon = isVerified ? '✔' : '✖';
+
+                resultsContentDiv.innerHTML = `
+                    <div class="text-center mb-6">
+                        <span class="inline-block ${statusColor} text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+                            ${statusIcon} ${statusText}
+                        </span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg text-gray-400">This is to certify that</p>
+                        <h2 class="text-4xl font-serif text-white my-4">${certificate['Name']}</h2>
+                        <p class="text-lg text-gray-400">has successfully completed the course</p>
+                        <h3 class="text-2xl font-semibold text-accent my-4">${certificate['Course Name']}</h3>
+                    </div>
+                    <div class="border-t border-b border-gray-700 my-8 py-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="text-sm text-gray-400 uppercase tracking-wider">Date of Issue</p>
+                            <p class="text-lg font-semibold text-white">${certificate['Date of Issue']}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 uppercase tracking-wider">Internship Duration</p>
+                            <p class="text-lg font-semibold text-white">${certificate['Duration']}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 uppercase tracking-wider">Certificate ID</p>
+                            <p class="text-lg font-semibold text-white">${certificate['Certificate ID']}</p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xl font-bold text-white">Computer<span class="text-accent">Solution</span></p>
+                        <p class="text-sm text-gray-400">Issuing Authority</p>
+                    </div>
+                `;
+                resultsDiv.classList.remove('hidden');
+            }
+
+            verificationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const credentialId = document.getElementById('credential-id').value.trim();
+                if (!credentialId) {
+                    resultsDiv.classList.add('hidden');
+                    loadingDiv.classList.add('hidden');
+                    errorDiv.textContent = 'Please enter a Certificate ID.';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+
+                resultsDiv.classList.add('hidden');
+                errorDiv.classList.add('hidden');
+                loadingDiv.classList.remove('hidden');
+
+                // Simulate a short delay for a better user experience
+                setTimeout(() => {
+                    const normalizedId = credentialId.trim().toLowerCase();
+                    const certificate = certificatesData.find(row => {
+                        const idValue = (row['Certificate ID'] || '').toString().trim().toLowerCase();
+                        return idValue === normalizedId;
+                    });
+    
+                    loadingDiv.classList.add('hidden');
+    
+                    if (certificate) {
+                        displayCertificate(certificate);
+                    } else {
+                        errorDiv.textContent = 'Certificate not found. Please check the ID and try again.';
+                        errorDiv.classList.remove('hidden');
+                    }
+                }, 300);
+            });
+
+        })();
+
+        // Contact form submit -> email via backend
+        (function initContactForm(){
+            const form = document.getElementById('contact-form');
+            if (!form) return;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                // This functionality requires a backend. On a static site like GitHub Pages,
+                // you need to use a service like Formspree, Netlify Forms, or a serverless function.
+                alert('Contact form functionality requires a backend and is disabled on this static site.');
+            });
+        })();
+
+        // Chatbot functionality
+        const chatbotToggleButton = document.getElementById('chatbot-toggle-button');
+        const chatbotCloseButton = document.getElementById('chatbot-close-button');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const chatbotForm = document.getElementById('chatbot-form');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const typingIndicator = document.getElementById('typing-indicator');
+        let isWaitingForEmail = false; // State to check if we're waiting for an email
+        let firstInteraction = true;
+
+        function openChatbot() {
+            chatbotWindow.classList.remove('hidden');
+            setTimeout(() => { // Allow display property to apply before transitioning
+                chatbotWindow.classList.remove('opacity-0', 'scale-95');
+                chatbotWindow.classList.add('opacity-100', 'scale-100');
+            }, 10);
+            chatbotToggleButton.classList.add('opacity-0', 'scale-0', 'pointer-events-none');
+        }
+
+        function closeChatbot() {
+            chatbotWindow.classList.remove('opacity-100', 'scale-100');
+            chatbotWindow.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => chatbotWindow.classList.add('hidden'), 300); // Match transition duration
+            chatbotToggleButton.classList.remove('opacity-0', 'scale-0', 'pointer-events-none');
+        }
+
+        chatbotToggleButton.addEventListener('click', openChatbot);
+        chatbotCloseButton.addEventListener('click', closeChatbot);
+
+        chatbotForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+
+            // Hide suggestion buttons after first interaction
+            const welcomeMsg = document.getElementById('welcome-message-container');
+            if (welcomeMsg) welcomeMsg.remove();
+
+            addMessage(message, 'user');
+            chatbotInput.value = '';
+            showTypingIndicator();
+
+            // Simulate bot response after 1.5 seconds
+            setTimeout(() => {
+                hideTypingIndicator();
+                getBotResponse(message);
+                if (firstInteraction) {
+                    // Add a small delay for the suggestions to appear after the response
+                    setTimeout(() => {
+                        addSuggestionButtons();
+                    }, 500);
+                    firstInteraction = false;
+                }
+            }, 1500);
+        });
+
+        function addMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('flex', 'mb-4');
+
+            const bubble = document.createElement('div');
+            // Add base styling to the bubble itself
+            bubble.classList.add('p-3', 'rounded-lg', 'max-w-xs', 'text-sm', 'leading-relaxed');
+
+            if (sender === 'user') {
+                messageElement.classList.add('justify-end');
+                bubble.classList.add('bg-gray-700', 'text-white');
+                // For user input, it's safer to use textContent to prevent XSS
+                bubble.textContent = text;
+            } else {
+                bubble.classList.add('bg-accent-button', 'text-white');
+                // For bot responses, we trust the source and allow HTML for rich formatting
+                bubble.innerHTML = text;
+            }
+
+            messageElement.appendChild(bubble);
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll to bottom
+        }
+        function showTypingIndicator() {
+            typingIndicator.classList.remove('hidden');
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            typingIndicator.classList.add('hidden');
+        }
+
+        function addSuggestionButtons() {
+            const suggestionsHTML = `
+                <p class="text-xs mb-3">For example, you can ask me about:</p>
+                <div class="space-y-2">
+                    <button class="suggestion-btn">Our services</button>
+                    <button class="suggestion-btn">Internship details</button>
+                    <button class="suggestion-btn">How to contact us</button>
+                </div>
+            `;
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('flex', 'mb-4');
+
+            const bubble = document.createElement('div');
+            bubble.classList.add('bg-accent-button', 'text-white', 'p-3', 'rounded-lg', 'max-w-xs', 'text-sm');
+            bubble.innerHTML = suggestionsHTML;
+
+            messageElement.appendChild(bubble);
+            chatbotMessages.appendChild(messageElement);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Handle clicks on suggestion buttons
+        chatbotMessages.addEventListener('click', function(e) {
+            if (e.target.classList.contains('suggestion-btn')) {
+                const question = e.target.textContent;
+                const welcomeMsg = document.getElementById('welcome-message-container');
+                if (welcomeMsg) welcomeMsg.remove();
+                
+                addMessage(question, 'user');
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    getBotResponse(question);
+                }, 1500);
+            }
+        });
+
+        function getBotResponse(userInput) {
+            const lowerInput = userInput.toLowerCase();
+
+            // STATE 1: We are waiting for the user to provide an email.
+            if (isWaitingForEmail) {
+                // Allow user to ask another question to exit the email prompt
+                const isQuestion = ['what', 'how', 'who', 'where', 'when', 'why', 'tell me', 'service', 'internship', 'contact', 'data', 'design', 'develop', 'market'].some(kw => lowerInput.includes(kw));
+
+                if (validateEmail(userInput)) {
+                    addMessage(`<p>Thank you! Our team will get in touch with you at <strong>${userInput}</strong> shortly.</p>`, 'bot');
+                    isWaitingForEmail = false; // Reset state
+                    return;
+                } else if (!isQuestion) {
+                    addMessage("<p>That doesn't look like a valid email address. Please provide a valid email so we can get back to you, or feel free to ask another question.</p>", 'bot');
+                    return;
+                }
+                // If it is a question, fall through to the normal logic and reset the state.
+                isWaitingForEmail = false;
+            }
+
+            // STATE 2: Normal conversation flow.
+            let response = null;
+
+            if (lowerInput.includes('internship')) {
+                if (lowerInput.includes('apply') || lowerInput.includes('how') || lowerInput.includes('process')) {
+                    response = `
+                        <p class="mb-2">Great question! Here is our simple, four-step internship process:</p>
+                        <ol class="list-decimal list-inside space-y-3">
+                            <li>
+                                <strong>Apply via LinkedIn</strong><br>
+                                <span class="pl-4 text-xs">Submit your application through our LinkedIn portal.</span>
+                            </li>
+                            <li>
+                                <strong>Select Your Domain</strong><br>
+                                <span class="pl-4 text-xs">Choose from our 12+ specialized domains.</span>
+                            </li>
+                            <li>
+                                <strong>Work on Real Projects</strong><br>
+                                <span class="pl-4 text-xs">Gain hands-on experience with impactful work.</span>
+                            </li>
+                            <li>
+                                <strong>Get Certified</strong><br>
+                                <span class="pl-4 text-xs">Earn your official recognition and professional certification.</span>
+                            </li>
+                        </ol>
+                        <p class="mt-3">You can start by applying on LinkedIn. Would you like the link?</p>
+                    `;
+                } else {
+                    response = "<p>Our internships are government recognized! You can work on real projects, get a Letter of Recommendation (LOR) as a top performer, and even get full-time opportunities. You can ask me how to apply, or about the benefits!</p>";
+                }
+            } else if (lowerInput.includes('data')) {
+                response = `
+                    <p class="mb-2">Our <strong>Data Solutions</strong> are enterprise-grade services that transform information into strategic assets. We build secure, scalable, and intelligent data ecosystems.</p>
+                    <strong class="block mb-1">Core Capabilities:</strong>
+                    <ul class="list-disc list-inside space-y-1"><li>Advanced Data Analytics & Visualization</li><li>Business Intelligence (BI) Platforms</li><li>Big Data Engineering</li><li>Data Warehousing & ETL Automation</li><li>Predictive & Prescriptive Analytics</li><li>Data Governance & Compliance</li></ul>
+                    <strong class="block mt-3 mb-1">Technologies:</strong>
+                    <p>Power BI, Tableau, Snowflake, AWS, Redshift, Azure Synapse, Google BigQuery, Python, R, Apache Spark, Hadoop.</p>
+                `;
+            } else if (lowerInput.includes('design')) {
+                response = `
+                    <p class="mb-2">Our <strong>Design & Innovation</strong> service creates impactful, user-centric designs that blend aesthetics with functionality, ensuring optimal engagement.</p>
+                    <strong class="block mb-1">Core Capabilities:</strong>
+                    <ul class="list-disc list-inside space-y-1"><li>Brand Identity Design</li><li>Product & Interaction Design</li><li>3D Modeling & Motion Graphics</li><li>Design System Development</li></ul>
+                    <strong class="block mt-3 mb-1">Tools:</strong>
+                    <p>Figma, Adobe Creative Cloud, Sketch, InVision, Zeplin, Blender, Cinema 4D, Webflow.</p>
+                `;
+            } else if (lowerInput.includes('develop') || lowerInput.includes('engineer')) {
+                response = `
+                    <p class="mb-2">Our <strong>Development & Engineering</strong> service offers full-stack expertise, from high-performance web platforms to mission-critical enterprise software.</p>
+                    <strong class="block mb-1">Expertise Areas:</strong>
+                    <ul class="list-disc list-inside space-y-1"><li>Enterprise App Development</li><li>Mobile App Development</li><li>Custom Software Solutions</li><li>Cloud Application Development</li><li>API & Systems Integration</li><li>DevOps & Automation</li></ul>
+                    <strong class="block mt-3 mb-1">Tech Stack:</strong>
+                    <ul class="text-gray-400 list-disc list-inside space-y-1">
+                        <li>React, Angular, Vue.js, Node.js</li>
+                        <li>Python, Java, .NET, Flutter</li>
+                        <li>Kotlin, Swift, Docker, Kubernetes</li>
+                        <li>AWS, Azure, GCP</li>
+                    </ul>
+                `;
+            } else if (lowerInput.includes('market')) {
+                response = `
+                    <p class="mb-2">Our <strong>Digital Marketing</strong> service uses data-driven strategies to accelerate brand growth, maximize ROI, and deliver measurable business outcomes.</p>
+                    <strong class="block mb-1">Marketing Expertise:</strong>
+                    <ul class="list-disc list-inside space-y-1"><li>360° Digital Marketing Strategy</li><li>Search Engine Optimization (SEO)</li><li>Paid Media & Performance Marketing</li><li>Content Marketing & Storytelling</li><li>Social Media Management</li><li>Marketing Automation & CRM</li></ul>
+                    <strong class="block mt-3 mb-1">Platforms:</strong>
+                    <ul class="text-gray-400 list-disc list-inside space-y-1">
+                        <li>Google Analytics 4, Google Ads</li>
+                        <li>Meta Ads, HubSpot, Salesforce</li>
+                        <li>SEMrush, Ahrefs, Mailchimp</li>
+                    </ul>
+                `;
+            } else if (lowerInput.includes('service') || lowerInput.includes('what do you do')) {
+                response = "<p>We offer four main services: Data Solutions, Design & Innovation, Development & Engineering, and Digital Marketing. Which one would you like to know more about?</p>";
+            } else if (lowerInput.includes('contact') || lowerInput.includes('email') || lowerInput.includes('phone')) {
+                response = "<p>You can reach us via email at ComputerSolution0105@gmail.com or by phone at 1234567890. Our office is located at 450 mumbai maharashtra 400001.</p>";
+            } else if (lowerInput.includes('hello') || lowerInput.includes('hi')) {
+                response = "<p>Hello there! How can I assist you today?</p>";
+            } else if (lowerInput.includes('thank')) {
+                response = "<p>You're welcome! Is there anything else I can help you with?</p>";
+            }
+
+            if (response) {
+                addMessage(response, 'bot');
+            } else {
+                addMessage("<p>I'm sorry, I couldn't find an answer to your question. Could you please provide your email address? Our team will get back to you shortly.</p>", 'bot');
+                isWaitingForEmail = true; // Set state to wait for email
+            }
+        }
+
+        function validateEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+    </script>
+</body>
+</html>

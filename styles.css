@@ -1,0 +1,96 @@
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	background-color: #0b1220; /* dark background to match main site */
+	color: #e5e7eb; /* light text */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+.container {
+	background-color: #111827; /* dark card */
+	padding: 40px;
+	border-radius: 16px; /* larger radius like main site */
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+	text-align: center;
+	max-width: 560px;
+	width: 100%;
+	border: 1px solid #1f2937; /* subtle border */
+}
+
+h1 {
+	color: #60a5fa; /* blue accent */
+	margin-bottom: 10px;
+}
+
+p {
+	color: #9ca3af; /* gray-400 */
+	margin-bottom: 20px;
+}
+
+.search-box {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+#certificateId {
+	width: 70%;
+	padding: 12px;
+	border: 1px solid #374151; /* gray-700 */
+	background-color: #0f172a; /* slate-900 */
+	color: #e5e7eb;
+	border-radius: 8px 0 0 8px;
+	font-size: 16px;
+	outline: none;
+}
+
+#certificateId::placeholder { color: #6b7280; }
+
+#certificateId:focus {
+	border-color: #2563eb; /* accent */
+	box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+#verifyButton {
+	padding: 12px 20px;
+	border: none;
+	background-color: #2563eb; /* accent button */
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 0 8px 8px 0;
+	transition: background-color 0.2s ease, transform 0.05s ease;
+}
+
+#verifyButton:hover { background-color: #1d4ed8; }
+#verifyButton:active { transform: translateY(1px); }
+
+#results {
+	margin-top: 20px;
+	text-align: left;
+	padding: 20px;
+	border-radius: 8px;
+	background-color: #0f172a; /* dark panel */
+	border: 1px solid #1f2937;
+}
+
+#results p { margin: 10px 0; }
+
+.loading { color: #60a5fa; }
+
+.error {
+	color: #f87171; /* red-400 */
+	font-weight: 600;
+}
+
+.certificate-valid { border-left: 5px solid #34d399; padding-left: 15px; }
+.certificate-valid h3 { color: #34d399; }
+
+.certificate-invalid { border-left: 5px solid #f87171; padding-left: 15px; }
+.certificate-invalid h3 { color: #f87171; }
+
+.tick { color: #34d399; }
+.cross { color: #f87171; }
