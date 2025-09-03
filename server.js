@@ -5,20 +5,24 @@ const path = require('path');
 const fs = require('fs').promises;
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // ✅ Use Render's provided PORT
 
 // --- Middleware Setup ---
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files (like index.html, images, etc.) from the parent directory
-app.use(express.static(path.join(__dirname, '..')));
+// ✅ Serve static files (index.html, css, images, etc.) from current directory
+app.use(express.static(__dirname));
+
+// ✅ Serve index.html explicitly at root
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
 // --- API Endpoints ---
 
 /**
  * @api {post} /api/contact Process Contact Form
- * @description Receives contact form data and sends it via email.
  */
 app.post('/api/contact', async (req, res) => {
     const { name, email, phone, message } = req.body;
@@ -27,15 +31,14 @@ app.post('/api/contact', async (req, res) => {
         return res.status(400).json({ message: 'Name, email, and phone are required.' });
     }
 
-    // IMPORTANT: Replace with your actual email service credentials.
-    // For security, use environment variables (e.g., process.env.EMAIL_USER) in production.
+    // ⚠️ Replace with real credentials (use env vars in production)
     const transporter = nodemailer.createTransport({
-        host: 'smtp.example.com', // Your SMTP host
+        host: 'smtp.example.com',
         port: 587,
-        secure: false, // true for 465, false for other ports
+        secure: false,
         auth: {
-            user: 'your-email@example.com', // Your email address
-            pass: 'your-email-password'     // Your email password
+            user: 'your-email@example.com',
+            pass: 'your-email-password'
         }
     });
 
@@ -64,20 +67,15 @@ app.post('/api/contact', async (req, res) => {
 
 /**
  * @api {get} /api/verify/:id Verify a Certificate
- * @description Looks up a certificate by its ID from certificates.json.
  */
 const certificatesPath = path.join(__dirname, 'certificates.json');
 
-// This function reads the certificate data on each request.
-// This is great for development as you don't need to restart the server
-// when you change the certificates.json file.
 async function getCertificates() {
     try {
         const data = await fs.readFile(certificatesPath, 'utf8');
         return JSON.parse(data);
     } catch (error) {
         console.error('Could not read or parse certificates.json.', error);
-        // Return an empty array to prevent crashes, the find will just fail.
         return [];
     }
 }
@@ -101,13 +99,12 @@ app.get('/api/verify/:id', async (req, res) => {
 
 // --- Server Start ---
 app.listen(port, async () => {
-    // We can do an initial load to check if the file is present and valid on startup.
     const initialCerts = await getCertificates();
     if (initialCerts.length > 0) {
-        console.log(`Certificate data loaded successfully. Found ${initialCerts.length} certificates.`);
+        console.log(`Certificate data loaded. Found ${initialCerts.length} certificates.`);
     } else {
-        console.warn('Warning: certificates.json is empty or could not be loaded. Verification will fail until the file is fixed.');
+        console.warn('Warning: certificates.json is empty or missing.');
     }
-    console.log(`Server running at http://localhost:${port}`);
-    console.log(`Serving website from: ${path.join(__dirname, '..')}`);
+    console.log(`✅ Server running on port ${port}`);
+    console.log(`Serving website from: ${__dirname}`);
 });
