@@ -101,8 +101,16 @@
         "Duration": "3 MONTH",
         "Date of Issue": "12/18/2024",
         "Verification Status": "TRUE"
-    }
+    },
+    {
+        "Name": "Isham Singh",
+        "Certificate ID": "CERT-001-MNO",
+        "Course Name": "AI Engineer",
+        "Duration": "3 MONTH",
+        "Date of Issue": "12/18/2025",
+        "Verification Status": "TRUE"
 
 ]
+
 
 
